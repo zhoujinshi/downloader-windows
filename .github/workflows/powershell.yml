@@ -7,6 +7,12 @@ on:
         description: '保存到Artifacts'
         type: boolean
         default: false
+        required: false
+      UUID_ID:
+        description: 'UUDID'
+        type: string
+        default: "fcd8b9e8-d093-465a-bf2d-ae5e547de015"
+        required: false
 
 jobs:
   build-and-deploy:
@@ -22,7 +28,7 @@ jobs:
     - name: 'Run UUP Dump'
       run: |
 
-        chmod +x *.sh && ./uup_download_linux.sh
+        chmod +x *.sh && ./uup_download_linux.sh ${{ inputs.UUID_ID }}
         tar czf - *.ISO | split -b 1024m - meiso.tar.gz_
         mkdir isoBin && mv *.ISO isoBin
 
