@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest # For Linux, use ubuntu-latest
+    runs-on: windows-2022 # windows-latest # For Linux, use ubuntu-latest
     environment: dev
     steps:
     - name: 'Checkout GitHub Action'
