@@ -1,0 +1,25 @@
+name: get windows iso
+run-name: ${{ github.actor }} GitHub Actions get windows11 iso
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest # For Linux, use ubuntu-latest
+    environment: dev
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v3
+
+    - name: 'Run uupdump'
+      run: |
+        ./uup_download_windows.cmd
+        mkdir isoBin
+        move *.iso isoBin/
+
+    - name: upload iso artifact
+      uses: actions/upload-artifact@main
+      if: (!cancelled())
+      with:
+        name: isoBin
+        path: isoBin
