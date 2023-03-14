@@ -12,6 +12,7 @@ jobs:
 
     - name: 'Run UUP Dump'
       run: |
+        Get-Help Get-FileHash
         ./uup_download_windows.cmd
         mkdir isoBin
         move *.iso isoBin/
