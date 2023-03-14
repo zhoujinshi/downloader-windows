@@ -12,7 +12,6 @@ jobs:
 
     - name: 'Run UUP Dump'
       run: |
-        Get-Help Get-FileHash
         ./uup_download_linux.sh
         mkdir isoBin
         mv *.iso isoBin/
