@@ -12,10 +12,8 @@ jobs:
 
     - name: 'Run UUP Dump'
       run: |
-        chmod +x uup_download_linux.sh
-        ./uup_download_linux.sh
-        mkdir isoBin
-        mv *.iso isoBin/
+        chmod +x *.sh && ./uup_download_linux.sh
+        mkdir isoBin && mv *.iso isoBin/
 
     - name: Upload ISO Artifact
       uses: actions/upload-artifact@main
