@@ -10,8 +10,13 @@ jobs:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v3
 
+    - name: 'init System'
+      run: |
+        sudo apt-get install aria2 cabextract wimtools chntpw genisoimage -y
+
     - name: 'Run UUP Dump'
       run: |
+
         chmod +x *.sh && ./uup_download_linux.sh
         mkdir isoBin && mv *.iso isoBin/
 
