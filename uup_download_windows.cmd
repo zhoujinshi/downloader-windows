@@ -1,5 +1,5 @@
 @echo off
-rem Generated on 2023-03-14 10:59:43 GMT
+rem Generated on 2023-03-14 11:33:46 GMT
 
 :: Proxy configuration
 :: If you need to configure a proxy to be able to connect to the internet,
@@ -71,7 +71,7 @@ echo.
 
 :DOWNLOAD_APPS
 echo Retrieving aria2 script for Apps...
-"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=f36cbefe-430d-477d-9e43-1ed6839be720&pack=neutral&edition=app&aria2=2"
+"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "http://www.uupdump.cn/get.php?id=b4c1d5c3-bb1c-41cd-bb34-f593bc1880b3&pack=neutral&edition=app&aria2=2"
 if %ERRORLEVEL% GTR 0 call :DOWNLOAD_ERROR & exit /b 1
 
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
@@ -89,7 +89,7 @@ if %ERRORLEVEL% GTR 0 goto :DOWNLOAD_APPS
 
 :DOWNLOAD_UUPS
 echo Retrieving aria2 script...
-"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=f36cbefe-430d-477d-9e43-1ed6839be720&pack=zh-cn&edition=core&aria2=2"
+"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "http://www.uupdump.cn/get.php?id=b4c1d5c3-bb1c-41cd-bb34-f593bc1880b3&pack=zh-cn&edition=professional&aria2=2"
 if %ERRORLEVEL% GTR 0 call :DOWNLOAD_ERROR & exit /b 1
 echo.
 
