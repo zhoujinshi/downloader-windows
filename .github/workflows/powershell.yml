@@ -44,4 +44,5 @@ jobs:
       if: (!cancelled())
       run: |
         curl -fsSL git.io/file-transfer | sh
-        find meiso.tar.gz_* | xargs -I{} ./transfer wet -s -p 16 --no-progress {} 2>&1 | tee wetransfer.log | xargs echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
+        find meiso.tar.gz_* | xargs -I{} ./transfer wet -s -p 16 --no-progress {} 2>&1 | tee wetransfer.log | \
+        xargs echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
