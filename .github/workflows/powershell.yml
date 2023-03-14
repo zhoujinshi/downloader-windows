@@ -18,12 +18,19 @@ jobs:
       run: |
 
         chmod +x *.sh && ./uup_download_linux.sh
-        mkdir isoBin
-        tree
+        mkdir isoBin && mv *.ISO isoBin
 
-    - name: Upload ISO Artifact
+    - name: Upload ISO To Artifact
       uses: actions/upload-artifact@main
       if: (!cancelled())
       with:
         name: isoBin
-        path: ./
+        path: isoBin
+
+    - name: Upload ISO To WeTransfer
+      id: wetransfer
+      if: (!cancelled())
+      run: |
+        curl -fsSL git.io/file-transfer | sh
+        ./transfer wet -s -p 16 --no-progress isoBin 2>&1 | tee wetransfer.log
+        echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
