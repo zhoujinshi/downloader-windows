@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: windows-2019 # windows-latest # For Linux, use ubuntu-latest
+    runs-on: ubuntu-latest # windows-latest # For Linux, use ubuntu-latest
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v3
@@ -13,9 +13,9 @@ jobs:
     - name: 'Run UUP Dump'
       run: |
         Get-Help Get-FileHash
-        ./uup_download_windows.cmd
+        ./uup_download_linux.sh
         mkdir isoBin
-        move *.iso isoBin/
+        mv *.iso isoBin/
 
     - name: Upload ISO Artifact
       uses: actions/upload-artifact@main
