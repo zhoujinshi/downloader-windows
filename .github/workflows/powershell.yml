@@ -7,12 +7,23 @@ on:
         description: '保存到Artifacts'
         type: boolean
         default: false
-        required: false
+        required: true
       UUID_ID:
         description: 'UUDID'
         type: string
-        default: "fcd8b9e8-d093-465a-bf2d-ae5e547de015"
-        required: false
+        default: "7231ca3d-3c62-4f87-b875-33275f58c980"
+        required: true
+      RELEASE_NAME:
+        description: '版本标题'
+        type: string
+        default: "Windows 11 Insider Preview 10.0.22624.1391 (ni_release) amd64"
+        required: true
+      RELEASE_TAG:
+        description: '版本TAG'
+        type: string
+        default: "22624.1391"
+        required: true
+        
 
 jobs:
   build-and-deploy:
@@ -45,4 +56,27 @@ jobs:
       run: |
         curl -fsSL git.io/file-transfer | sh
         find meiso.tar.gz_* | xargs -I{} ./transfer wet -s -p 16 --no-progress {} 2>&1 | tee wetransfer.log | \
-        xargs echo -e "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)\n"
+        xargs echo -e "::warning file=wetransfer.com[{}]::$(cat wetransfer.log | grep https)\n"
+        touch release.txt
+        cat >> release.txt <<EOF
+        🚀 Auto build | 自动编译
+        ### Transfer expires in 7 days
+        > use cmd：
+        ~~~
+        cat meiso.tar.gz_* >meiso.tar.gz
+        tar zvxf meiso.tar.gz
+        rm -rf me*
+        echo -e '\a';
+        ~~~
+        EOF
+        
+    - name: Upload To Release
+      uses: softprops/action-gh-release@v1
+      if: (!cancelled())
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        name: ${{ inputs.RELEASE_NAME }}
+        tag_name: ${{ inputs.RELEASE_TAG }}
+        body_path: release.txt
+
