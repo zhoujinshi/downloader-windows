@@ -56,11 +56,12 @@ jobs:
       run: |
         curl -fsSL git.io/file-transfer | sh
         find meiso.tar.gz_* | xargs -I{} ./transfer wet -s -p 16 --no-progress {} 2>&1 | tee wetransfer.log | \
-        xargs echo -e "::warning file=wetransfer.com[{}]::$(cat wetransfer.log | grep https)\n"
+        xargs echo -e "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)\n"
         touch release.txt
         cat >> release.txt <<EOF
         🚀 Auto build | 自动编译
         ### Transfer expires in 7 days
+        
         > use cmd：
         ~~~
         cat meiso.tar.gz_* >meiso.tar.gz
