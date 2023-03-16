@@ -1,5 +1,5 @@
 name: get windows iso
-run-name: ${{ github.actor }} GitHub Actions get windows11 iso
+run-name: ${{ inputs.RELEASE_NAME }} GitHub Actions get windows11 iso
 on:
   workflow_dispatch:
     inputs:
